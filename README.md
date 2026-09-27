@@ -18,3 +18,4 @@ This project demonstrates a Java application built with Maven and deployed using
 - Maven
 - Docker
 - GitHub Actions
+- Add MongoDB dependency
