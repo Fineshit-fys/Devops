@@ -15,4 +15,6 @@ This project demonstrates a Java application built with Maven and deployed using
 - Docker
 - GitHub Actions
 
+# DevOps
 
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/Fineshit-fys/Devops/main.yml?branch=develop&style=flat-square)
