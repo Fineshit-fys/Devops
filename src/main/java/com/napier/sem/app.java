@@ -12,7 +12,7 @@ public class app {
         // Suppress MongoDB driver logging output
         Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
 
-        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        MongoClient mongoClient = new MongoClient("mongo-dbserver", 27017);
         MongoDatabase database = mongoClient.getDatabase("mydb");
         MongoCollection<Document> collection = database.getCollection("test");
 
