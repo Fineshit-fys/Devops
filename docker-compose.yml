@@ -1,0 +1,20 @@
+  version: '3.8'
+
+  services:
+    # MySQL Database Service
+    db:
+      build: db/
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: example
+      ports:
+        - "3306:3306"
+
+    # Java Application Service
+    app:
+      build: .
+      restart: always
+      ports:
+        - "8080:8080"
+      depends_on:
+        - db
