@@ -12,7 +12,13 @@ public class app {
         // Suppress MongoDB driver logging output
         Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
 
-        MongoClient mongoClient = new MongoClient("mongo-dbserver", 27017);
+        // Uses MONGO_HOST environment variable if set, otherwise defaults to localhost for IntelliJ
+        String mongoHost = System.getenv("MONGO_HOST");
+        if (mongoHost == null || mongoHost.isEmpty()) {
+            mongoHost = "localhost";
+        }
+
+        MongoClient mongoClient = new MongoClient(mongoHost, 27017);
         MongoDatabase database = mongoClient.getDatabase("mydb");
         MongoCollection<Document> collection = database.getCollection("test");
 
