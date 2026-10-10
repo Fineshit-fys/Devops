@@ -9,28 +9,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+        with:
+          submodules: recursive
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Setup network and MongoDB
-        run: |
-          docker network create --driver bridge se-methods
-          docker pull mongo
-          docker run -d --name mongo-dbserver --network se-methods mongo
-
       - name: Build with Maven
         run: mvn package
 
-      - name: Build Docker Image
-        run: docker build -t se_methods .
-
-      - name: Run image
-        run: docker run --network se-methods --name devopscontainer se_methods
-
-      - name: View logs
-        run: docker logs devopscontainer
+      - name: Run docker compose
+        run: docker compose up --abort-on-container-exit
