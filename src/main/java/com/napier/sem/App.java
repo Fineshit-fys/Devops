@@ -2,7 +2,7 @@ package com.napier.sem;
 
 import java.sql.*;
 
-public class app {
+public class App {
     private Connection con = null;
 
     public void connect(String location, int delay) {
@@ -95,7 +95,7 @@ public class app {
     }
 
     public static void main(String[] args) {
-        app a = new app();
+        App a = new App();
 
         if (args.length < 1) {
             a.connect("db:3306", 10000);
