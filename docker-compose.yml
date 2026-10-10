@@ -1,7 +1,9 @@
 services:
   # MySQL Database Service
   db:
-    build: db/
+    build:
+      context: .
+      dockerfile: db/Dockerfile
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: example

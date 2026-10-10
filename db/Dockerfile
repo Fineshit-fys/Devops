@@ -1,10 +1,12 @@
-FROM mysql/mysql-server:latest
+FROM mysql:8.0
 
-WORKDIR /tmp
+# Copy test_db files into container
+COPY test_db/ /tmp/test_db/
 
-COPY test_db/*.sql /tmp/
-COPY test_db/*.dump /tmp/
-COPY test_db/employees.sql /docker-entrypoint-initdb.d/
+# Create an initialization script to load the employees database correctly
+RUN echo '#!/bin/bash' > /docker-entrypoint-initdb.d/load.sh && \
+    echo 'cd /tmp/test_db' >> /docker-entrypoint-initdb.d/load.sh && \
+    echo 'mysql -u root -p"$MYSQL_ROOT_PASSWORD" < employees.sql' >> /docker-entrypoint-initdb.d/load.sh && \
+    chmod +x /docker-entrypoint-initdb.d/load.sh
 
 ENV MYSQL_ROOT_PASSWORD=example
-ENV MYSQL_ROOT_HOST=%
